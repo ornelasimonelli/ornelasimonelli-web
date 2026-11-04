@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Lectura del portfolio | Ornela L. Simonelli</title>
+  <style>
+    :root{--green:#183c34;--cream:#f7f3ea;--rose:#b57c7f;--ink:#243b32}
+    *{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+    .bar{background:var(--green);color:#fdf9f2;padding:20px max(18px,calc((100vw - 1100px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    .bar a{color:#fdf9f2;text-decoration:none}.monogram{font:26px Georgia,serif}.back{font-size:14px;border:1px solid #789087;padding:11px 16px}
+    main{max-width:1130px;margin:0 auto;padding:44px 18px 80px;text-align:center}.label{text-transform:uppercase;letter-spacing:.18em;color:var(--rose);font-size:12px;font-weight:700}
+    h1{font:normal clamp(30px,4vw,48px)/1.2 Georgia,serif;color:var(--green);margin:12px auto 14px;max-width:900px}.intro{max-width:660px;margin:0 auto 24px;line-height:1.6;color:#53635b}
+    .controls{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin:24px 0}.controls button{background:var(--green);color:#fff;border:0;padding:13px 21px;cursor:pointer;font-size:15px}.controls button:disabled{opacity:.35;cursor:not-allowed}
+    .counter{min-width:125px;font-weight:600;font-size:14px}.page{display:block;width:min(100%,850px);height:auto;margin:auto;box-shadow:0 18px 45px #193b3225;background:white;border:1px solid #e6ded3}
+    .notice{max-width:660px;margin:20px auto;color:#53635b;font-size:13px;line-height:1.65}.footer{text-align:center;background:#102d26;color:#d9e4dd;padding:23px 10px;font-size:13px}
+    @media(max-width:600px){main{padding-top:30px}.bar{padding:15px}.controls{gap:8px}.controls button{padding:10px 12px}}
+  </style>
+</head>
+<body>
+  <header class="bar"><a class="monogram" href="index.html#portfolio" aria-label="Volver al portfolio de Ornela Simonelli">OS</a><a class="back" href="index.html#portfolio">← Volver al portfolio</a></header>
+  <main>
+    <div class="label">Portfolio editorial · Muestra de trabajo</div>
+    <h1 id="title">Informe editorial</h1>
+    <p class="intro">Lectura de una muestra de mi trabajo. Cada página incluye una marca de autoría. Este visor no ofrece descarga directa.</p>
+    <nav class="controls" aria-label="Navegación de páginas"><button id="prev" type="button">← Anterior</button><span class="counter" id="count" aria-live="polite">Página 1</span><button id="next" type="button">Siguiente →</button></nav>
+    <img class="page" id="page" alt="Primera página del documento" draggable="false">
+    <nav class="controls" aria-label="Navegación inferior"><button id="prev2" type="button">← Anterior</button><span class="counter" id="count2">Página 1</span><button id="next2" type="button">Siguiente →</button></nav>
+    <p class="notice">© Ornela L. Simonelli. Material de portfolio. Se ruega no reproducir ni redistribuir sin autorización. La visualización en línea no impide técnicamente las capturas de pantalla.</p>
+  </main>
+  <footer class="footer">Ornela L. Simonelli · Edición y lectura editorial · Barcelona</footer>
+  <script>
+    const catalog = {
+      resena:{title:'Reseña y crítica de una obra narrativa',folder:'resena',pages:7},
+      'informe-integral':{title:'Informe editorial integral de obra original: lectura, valoración y editing',folder:'informe-integral',pages:4},
+      'la-sed':{title:'Informe editorial de editing de manuscrito (ficción distópica)',folder:'la-sed',pages:13}
+    };
+    const key = new URLSearchParams(location.search).get('doc');
+    const doc = catalog[key];
+    if(!doc){document.querySelector('main').textContent='Documento no disponible. Volvé al portfolio para elegir otro trabajo.';}
+    else{
+      let current=1;
+      document.title=doc.title+' | Ornela L. Simonelli';
+      document.getElementById('title').textContent=doc.title;
+      const show=()=>{
+        const number=String(current).padStart(2,'0');
+        const page=document.getElementById('page');
+        page.src=`assets/lectura/${doc.folder}/pagina-${number}.jpg`;
+        page.alt=`Página ${current} de ${doc.pages}: ${doc.title}`;
+        for(const id of ['count','count2'])document.getElementById(id).textContent=`Página ${current} de ${doc.pages}`;
+        for(const id of ['prev','prev2'])document.getElementById(id).disabled=current===1;
+        for(const id of ['next','next2'])document.getElementById(id).disabled=current===doc.pages;
+      };
+      const turn=delta=>{current=Math.max(1,Math.min(doc.pages,current+delta));show();window.scrollTo({top:0,behavior:'smooth'});};
+      for(const id of ['prev','prev2'])document.getElementById(id).addEventListener('click',()=>turn(-1));
+      for(const id of ['next','next2'])document.getElementById(id).addEventListener('click',()=>turn(1));
+      document.addEventListener('keydown',event=>{if(event.key==='ArrowRight')turn(1);if(event.key==='ArrowLeft')turn(-1);});
+      show();
+    }
+  </script>
+</body>
+</html>
