@@ -28,5 +28,25 @@
     <section class="cta" id="contacto"><div class="kicker" style="color:#cfddcf">Sigamos en contacto</div><h2>Conversemos.</h2><p>Estoy interesada en aportar mi experiencia en revisión de textos, coordinación documental y mi formación editorial a proyectos de calidad.</p><div class="actions" style="justify-content:center"><a class="btn light" href="mailto:ornelasimonelli@gmail.com?subject=Contacto%20profesional%20-%20Ornela%20Simonelli">Escribirme por email</a><a class="btn outline" href="https://www.linkedin.com/in/ornelasimonelli/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn outline" href="assets/Ornela_Simonelli_CV.pdf" download>CV en PDF</a></div></section>
   </main>
   <footer class="footer"><div class="wrap"><span>Ornela L. Simonelli · Barcelona, España</span><span>Edición · Revisión · Gestión documental</span></div></footer>
+  <script>
+    const portfolio = document.querySelector('#portfolio .portfolio-list');
+    const valoracion = document.createElement('a');
+    valoracion.className = 'portfolio-item';
+    valoracion.href = 'lector.html?doc=valoracion-comercial';
+    valoracion.setAttribute('aria-label', 'Leer informe de valoración literaria y comercial en la web');
+    valoracion.innerHTML = `<img src="assets/lectura/valoracion-comercial/pagina-01.jpg" alt="Vista previa del informe de valoración literaria y comercial"><div><span class="meta">Valoración literaria y comercial · 2025</span><h3>Informe de valoración literaria y comercial de obra narrativa</h3><p>Elaboración de un informe de valoración literaria y comercial de una obra narrativa, analizando en profundidad su estructura, desarrollo de personajes, recursos narrativos y temáticas principales.<br><br>Evaluación de la viabilidad comercial del texto, incluyendo definición de género, público objetivo, posicionamiento en el mercado, puntos fuertes y aspectos a mejorar.<br><br>El informe integra una mirada crítica sobre la experiencia de lectura, el impacto emocional y las decisiones narrativas, articulando criterios editoriales y comerciales para su posible publicación.<br><br>Trabajo realizado en el marco de formación editorial, con enfoque profesional.</p><span class="view">Leer informe en la web ↗</span></div>`;
+    portfolio.appendChild(valoracion);
+    portfolio.replaceChildren(valoracion, ...Array.from(portfolio.querySelectorAll('a.portfolio-item')).filter(item => item !== valoracion).reverse());
+    const originales = {
+      'la-sed': 'Elaboración de un informe de editing sobre un manuscrito de ficción distópica, centrado en el análisis estructural, narrativo y estilístico de la obra.<br><br>Se trabajó en la evaluación de trama, construcción de personajes, coherencia del worldbuilding, ritmo narrativo y funcionamiento del lenguaje, identificando fortalezas y debilidades del texto.<br><br>El informe incluye propuestas concretas de mejora orientadas a la reestructuración narrativa, el desarrollo de personajes y la optimización del potencial literario y comercial de la obra.<br><br>Trabajo realizado en el marco de formación editorial, con enfoque profesional.',
+      'informe-integral': 'Elaboración de un informe editorial integral sobre una obra original, incluyendo síntesis, valoración literaria, análisis comercial y propuestas de edición.<br><br>Se trabajó en la definición del posicionamiento del texto dentro del mercado editorial, la identificación del público objetivo y la evaluación de su potencial de publicación.<br><br>El informe incluye sugerencias de editing orientadas a mejorar la estructura, el ritmo narrativo y la coherencia estilística, así como la recomendación de sellos editoriales acordes a la propuesta.<br><br>Trabajo realizado en el marco de formación editorial, con enfoque profesional.',
+      'resena': 'Elaboración de una reseña y crítica literaria de una obra narrativa, diferenciando el abordaje descriptivo del analítico.<br><br>Se trabajó en la identificación de los ejes temáticos, construcción de personajes, recursos narrativos y tono de la obra, evaluando su efectividad y coherencia interna.<br><br>El análisis incluyó una valoración del desarrollo de la trama, la construcción del conflicto y el impacto del desenlace, integrando una mirada crítica sobre las decisiones narrativas y su efecto en la experiencia de lectura.<br><br>Trabajo realizado en el marco de formación editorial, con enfoque profesional.'
+    };
+    portfolio.querySelectorAll('a.portfolio-item').forEach(item => {
+      const doc = new URL(item.href).searchParams.get('doc');
+      if (originales[doc]) item.querySelector('p').innerHTML = originales[doc];
+    });
+    document.querySelectorAll('#portfolio a[aria-label$="en PDF"]').forEach(link => link.setAttribute('aria-label', link.getAttribute('aria-label').replace('en PDF', 'en el lector web')));
+  </script>
 </body>
 </html>
