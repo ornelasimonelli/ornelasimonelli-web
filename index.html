@@ -15,6 +15,58 @@
   .pub-controls{display:flex;justify-content:flex-end;gap:10px;max-width:900px;margin:8px 0}.pub-arrow{background:var(--green);color:#fff;border:0;border-radius:50%;width:43px;height:43px;font:28px Georgia,serif;cursor:pointer}.pub-arrow:hover{background:var(--green2)}.publication-track{display:flex;overflow-x:auto;gap:18px;scroll-snap-type:x mandatory;scrollbar-width:none;max-width:900px}.publication-track::-webkit-scrollbar{display:none}.publication-track .publication-card{flex:0 0 100%;scroll-snap-align:start;margin-top:0}.cursiva-cover{height:285px;background:#f5f0e9;border:1px solid #d9d2c7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:#18201e;text-align:center}.cursiva-cover span{font:700 clamp(33px,4vw,48px)/1.1 Georgia,serif;letter-spacing:.06em}.cursiva-cover small{font-size:12px;letter-spacing:.04em;padding:0 12px;color:#66736d}@media(max-width:800px){.publication-track .publication-card{flex-basis:100%}}
   .article-cover{height:285px;background:linear-gradient(135deg,#e8d6c0,#f8f1e7 55%,#d8e2d8);border:1px solid #d9d2c7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:18px;text-align:center;color:#183c34}.article-cover span{font:normal clamp(27px,3vw,39px)/1.13 Georgia,serif;letter-spacing:-.015em}.article-cover small{font-size:12px;color:#66736d}  .parix-cover{height:285px;background:linear-gradient(145deg,#fff4e7,#f3debb);border:1px solid #d9d2c7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:17px;padding:18px;text-align:center;color:#183c34}.parix-cover span{font:700 clamp(38px,4vw,53px)/1 Georgia,serif;letter-spacing:.06em}.parix-cover small{font-size:13px;max-width:210px;color:#66736d}  .portfolio-list:not(.expanded)>.portfolio-item:not(:first-child){display:none}.portfolio-more{max-width:860px;display:flex;justify-content:center;margin-top:26px}.portfolio-more .btn{cursor:pointer}.portfolio-more .btn:hover{transform:translateY(-2px)}
     .review-panel{max-width:900px;background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px #183c3408;padding:clamp(24px,4vw,46px);margin-top:30px}.review-panel blockquote{font:normal clamp(25px,3vw,36px)/1.38 Georgia,serif;color:var(--green);margin:14px 0 20px;border-left:4px solid var(--rose);padding-left:22px}.review-panel p{color:#53635b}.review-source{font-size:13px;color:var(--rose);letter-spacing:.04em}.review-details{margin-top:25px;border-top:1px solid var(--line);padding-top:20px}.review-details summary{cursor:pointer;color:var(--green);font-weight:700}.review-details .review-letter{padding-top:20px;max-width:730px}.review-details .review-letter p{margin:0 0 18px;line-height:1.85;font-family:Georgia,"Times New Roman",serif;font-size:17px;font-style:italic}.review-note{font-size:12px;color:var(--muted)}.review-details .review-letter p.review-note{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-style:normal;font-size:12px}
+  
+    /* Responsive refinement: preserve the desktop editorial identity. */
+    @media (max-width: 800px) {
+      html, body { width: 100%; overflow-x: clip; }
+      .wrap { width: 100%; max-width: 100%; padding-inline: clamp(18px, 5vw, 28px); }
+      .nav { flex-direction: column; align-items: stretch; gap: 18px; padding-block: 18px 15px; }
+      .mark { width: 48px; height: 48px; font-size: 22px; flex: none; }
+      .navlinks { display: flex; flex-wrap: nowrap; gap: 20px; overflow-x: auto; overflow-y: hidden; padding: 2px 0 10px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .navlinks::-webkit-scrollbar { display: none; }
+      .navlinks a { flex: 0 0 auto; scroll-snap-align: start; font-size: 11px; white-space: nowrap; }
+      .hero { grid-template-columns: 1fr; gap: 28px; padding-block: 40px 62px; }
+      .hero h1 { font-size: clamp(48px, 13vw, 70px); line-height: 1.04; margin: 14px 0 18px; overflow-wrap: anywhere; }
+      .hero p { font-size: 16px; line-height: 1.65; }
+      .hero img { width: min(82%, 310px); max-width: none; margin: 2px auto 0; border-width: 8px; box-shadow: 13px 13px 0 #31584c; }
+      .actions { gap: 10px; }
+      .actions .btn { flex: 1 1 185px; min-height: 48px; text-align: center; }
+      .section { padding-block: 56px; }
+      .section h2 { font-size: clamp(35px, 9vw, 46px); line-height: 1.17; }
+      .lede { font-size: 17px; line-height: 1.7; }
+      .split { grid-template-columns: 1fr; gap: 26px; }
+      .cards { grid-template-columns: 1fr; gap: 14px; margin-top: 24px; }
+      .card { padding: 25px; min-height: 0; }
+      .portfolio-item { grid-template-columns: minmax(0, 1fr); gap: 18px; max-width: 100%; padding: 20px; }
+      .portfolio-item img { width: min(185px, 100%); height: 235px; }
+      .portfolio-item .project-cover { width: min(185px, 100%); }
+      .portfolio-item h3 { font-size: 25px; }
+      .portfolio-item p { overflow-wrap: anywhere; }
+      .portfolio-more { max-width: 100%; }
+      .portfolio-more .btn { width: 100%; max-width: 350px; }
+      .review-panel { padding: 24px 20px; }
+      .review-panel blockquote { font-size: clamp(23px, 6.2vw, 30px); padding-left: 16px; }
+      .review-details .review-letter p { font-size: 16px; line-height: 1.8; }
+      .publication-track { max-width: 100%; }
+      .publication-track .publication-card { min-width: 0; grid-template-columns: 1fr; gap: 18px; padding: 18px; }
+      .publication-card h3 { font-size: 27px; }
+      .publication-photo { width: 100%; height: auto; aspect-ratio: 4 / 3; max-height: 300px; }
+      .pub-controls { justify-content: center; gap: 18px; margin-block: 14px; }
+      .pub-arrow { width: 48px; height: 48px; }
+      .cta { padding: 62px 22px; }
+      .cta h2 { font-size: clamp(36px, 9vw, 46px); }
+      .footer .wrap { flex-direction: column; gap: 8px; }
+      img, iframe, video { max-width: 100%; }
+    }
+    @media (max-width: 380px) {
+      .hero h1 { font-size: 45px; }
+      .hero .actions .btn { flex-basis: 100%; }
+      .stat { grid-template-columns: 68px minmax(0, 1fr); gap: 14px; }
+      .stat b { font-size: 34px; }
+      .portfolio-item { padding: 17px; }
+      .publication-track .publication-card { padding: 15px; }
+      .publication-card h3 { font-size: 25px; }
+    }
   </style>
 </head>
 <body>
@@ -98,3 +150,4 @@
   </script>
 </body>
 </html>
+
