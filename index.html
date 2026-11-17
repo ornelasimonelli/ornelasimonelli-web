@@ -119,8 +119,8 @@
             <p>Hay personas que se convierten en refugio, incluso cuando la vida nos encuentra lejos. Este libro habla de hermanas, de recuerdos compartidos, de las risas que nos salvan y de esos vínculos que permanecen aun en los días difíciles.</p>
             <p>Nació como una historia para una persona especial, pero también es para quienes aman profundamente a alguien: una hermana, un amigo, una familia elegida o esa persona con la que siempre pueden contar.</p>
             <div class="book-actions">
-              <a class="btn dark" href="assets/historias-para-cuando-la-vida-se-va-a-la-mierda.pdf" target="_blank" rel="noopener noreferrer">Leer online ↗</a>
-              <a class="btn dark" href="assets/historias-para-cuando-la-vida-se-va-a-la-mierda.pdf" download="historias-para-cuando-la-vida-se-va-a-la-mierda.pdf" target="_blank" rel="noopener noreferrer">Descargar PDF ↓</a>
+              <a class="btn dark" href="assets/historias-para-cuando-la-vida-se-va-a-la-mierda.pdf" target="_blank" rel="noopener noreferrer" data-book-action="read">Leer online ↗</a>
+              <a class="btn dark" href="assets/historias-para-cuando-la-vida-se-va-a-la-mierda.pdf" download="historias-para-cuando-la-vida-se-va-a-la-mierda.pdf" target="_blank" rel="noopener noreferrer" data-book-action="download">Descargar PDF ↓</a>
             </div>
             <p class="book-help">El libro es gratuito. Google Drive puede pedir una confirmación antes de descargar archivos grandes.</p>
             <p>¿Preferís leerlo en <strong>EPUB</strong> o te gustaría tener un <strong>ejemplar físico</strong>? <a href="mailto:ornelasimonelli@gmail.com?subject=Consulta%20por%20tu%20libro">Escribime y lo conversamos.</a></p>
@@ -300,7 +300,11 @@
         if (!link) return;
         const url = new URL(link.href, location.href);
         const placement = link.closest('.hero') ? 'hero' : link.closest('#contacto') ? 'contact' : 'content';
-        if (link.hasAttribute('download')) capture('cv_download_clicked', {placement});
+        if (link.dataset.bookAction) {
+          const eventName = link.dataset.bookAction === 'download' ? 'book_download_clicked' : 'book_read_clicked';
+          capture(eventName, {book: 'historias-para-cuando-la-vida-se-va-a-la-mierda'});
+        }
+        else if (link.hasAttribute('download')) capture('cv_download_clicked', {placement});
         else if (url.protocol === 'mailto:') capture('contact_clicked', {channel: 'email', placement});
         else if (link.matches('.publication-card')) capture('publication_clicked', {publication: link.dataset.publicationId, publication_title: link.querySelector('h3')?.textContent.trim()});
         else if (url.hostname === 'www.linkedin.com') capture('contact_clicked', {channel: 'linkedin', placement});
